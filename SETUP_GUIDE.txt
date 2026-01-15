@@ -1,0 +1,566 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║          AD COLLECTION - PANDUAN SETUP DENGAN XAMPP (WINDOWS)              ║
+║                      Pemrograman Web 1 / UAS Semester                      ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+📋 DAFTAR ISI PANDUAN:
+1. Prasyarat Instalasi
+2. Setup XAMPP
+3. Setup Database
+4. Konfigurasi Aplikasi
+5. Menjalankan Aplikasi
+6. Akun Default untuk Testing
+7. Troubleshooting
+
+═══════════════════════════════════════════════════════════════════════════════
+
+✅ 1. PRASYARAT INSTALASI
+
+Pastikan Anda sudah memiliki:
+   ✓ XAMPP (versi terbaru) - Download dari https://www.apachefriends.org/
+   ✓ PHP 7.4+ (sudah termasuk dalam XAMPP)
+   ✓ MySQL 8.0+ (sudah termasuk dalam XAMPP)
+   ✓ Browser modern (Chrome, Firefox, Edge)
+   ✓ Text Editor/IDE (VS Code, Notepad++, dll)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+✅ 2. SETUP XAMPP
+
+LANGKAH 1: INSTALASI XAMPP
+─────────────────────────────
+a) Download XAMPP dari: https://www.apachefriends.org/
+b) Jalankan installer (setup-xampp-xxxxx-vc16-installer.exe)
+c) Ikuti wizard instalasi, gunakan folder default: C:\xampp
+d) Selesaikan instalasi
+
+LANGKAH 2: MEMULAI XAMPP
+─────────────────────────
+a) Buka "XAMPP Control Panel"
+b) Klik tombol START untuk:
+   - Apache (Web Server)
+   - MySQL (Database Server)
+c) Pastikan keduanya berwarna hijau (running)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+✅ 3. SETUP DATABASE
+
+LANGKAH 1: LETAKKAN PROJECT DI FOLDER HTDOCS
+──────────────────────────────────────────────
+a) Folder project harus ada di: C:\xampp\htdocs\UAS-PW1_AD-COLLECTION\
+
+LANGKAH 2: MEMBUKA phpMyAdmin
+──────────────────────────────
+a) Buka browser (Chrome, Firefox, dll)
+b) Ketik URL: http://localhost/phpmyadmin
+c) Login:
+   - Username: root
+   - Password: (kosongkan, tekan Enter)
+
+LANGKAH 3: MEMBUAT DATABASE BARU
+──────────────────────────────────
+a) Klik tab "Databases"
+b) Bagian "Create database", masukkan nama: adcollection
+c) Collation pilih: utf8mb4_unicode_ci
+d) Klik tombol "Create"
+
+LANGKAH 4: IMPORT FILE SQL
+────────────────────────────
+a) Setelah database dibuat, klik database "adcollection"
+b) Klik tab "Import"
+c) Klik "Choose File" dan pilih: database_setup.sql
+   (File ada di: C:\xampp\htdocs\UAS-PW1_AD-COLLECTION\database_setup.sql)
+d) Klik "Go" atau "Import"
+e) Tunggu proses selesai - akan ada pesan "Import has been successful"
+
+HASIL IMPORT:
+Tabel yang akan dibuat:
+✓ users (Tabel user/akun)
+✓ products (Tabel produk)
+✓ orders (Tabel pesanan)
+✓ order_items (Tabel item pesanan)
+✓ activity_logs (Tabel log aktivitas)
+
+Data Dummy untuk Testing:
+✓ 2 user: admin, nova
+✓ 4 produk: hijab, gamis, dll
+✓ 2 pesanan: PES001, PES002
+
+═══════════════════════════════════════════════════════════════════════════════
+
+✅ 4. KONFIGURASI APLIKASI
+
+File konfigurasi database sudah siap di:
+📁 config/database.php
+
+Isi default sudah sesuai untuk XAMPP:
+   define('DB_HOST', 'localhost');
+   define('DB_USER', 'root');
+   define('DB_PASS', '');              ← Password kosong (default XAMPP)
+   define('DB_NAME', 'adcollection');
+
+✓ Tidak perlu diubah jika menggunakan XAMPP default!
+
+═══════════════════════════════════════════════════════════════════════════════
+
+✅ 5. MENJALANKAN APLIKASI
+
+LANGKAH 1: PASTIKAN XAMPP BERJALAN
+───────────────────────────────────
+✓ Apache harus running (hijau) di XAMPP Control Panel
+✓ MySQL harus running (hijau) di XAMPP Control Panel
+
+LANGKAH 2: AKSES APLIKASI DI BROWSER
+───────────────────────────────────────
+a) Buka browser
+b) Ketik URL: http://localhost/UAS-PW1_AD-COLLECTION/
+
+Aplikasi akan redirect otomatis ke halaman login.
+
+URL APLIKASI:
+├── Home/Login   : http://localhost/UAS-PW1_AD-COLLECTION/
+├── Dashboard    : http://localhost/UAS-PW1_AD-COLLECTION/dashboard.php
+├── Produk       : http://localhost/UAS-PW1_AD-COLLECTION/products/index.php
+├── Pesanan      : http://localhost/UAS-PW1_AD-COLLECTION/orders/index.php
+├── Laporan      : http://localhost/UAS-PW1_AD-COLLECTION/reports/index.php
+└── phpMyAdmin   : http://localhost/phpmyadmin/
+
+═══════════════════════════════════════════════════════════════════════════════
+
+✅ 6. AKUN DEFAULT UNTUK TESTING
+
+AKUN ADMIN:
+───────────
+Username: admin
+Password: password
+
+AKUN USER:
+──────────
+Username: nova
+Password: password
+
+CARA LOGIN:
+a) Buka http://localhost/UAS-PW1_AD-COLLECTION/
+b) Masukkan username
+c) Masukkan password
+d) Klik tombol "Masuk"
+
+═══════════════════════════════════════════════════════════════════════════════
+
+✅ 7. TROUBLESHOOTING
+
+MASALAH 1: "Koneksi database gagal"
+───────────────────────────────────
+✓ Pastikan MySQL sudah di-START di XAMPP Control Panel
+✓ Tunggu beberapa detik sampai fully loaded
+✓ Cek apakah port 3306 sudah digunakan aplikasi lain
+✓ Restart XAMPP jika perlu
+
+MASALAH 2: "Access denied for user 'root'"
+───────────────────────────────────────────
+✓ Pastikan password di config/database.php kosong ('')
+✓ Jangan ubah password MySQL XAMPP
+✓ Atau reset password MySQL melalui phpMyAdmin
+
+MASALAH 3: "File tidak ditemukan" atau 404 error
+──────────────────────────────────────────────────
+✓ Pastikan folder ada di: C:\xampp\htdocs\UAS-PW1_AD-COLLECTION\
+✓ Nama folder harus tepat (case sensitive)
+✓ Restart Apache dari XAMPP Control Panel
+
+MASALAH 4: "Database adcollection tidak ada"
+─────────────────────────────────────────────
+✓ Pastikan sudah import file database_setup.sql
+✓ Cek di phpMyAdmin apakah database sudah ada
+✓ Jika belum, lakukan import ulang
+
+MASALAH 5: File upload tidak bisa
+──────────────────────────────────
+✓ Pastikan folder assets/img/uploads/ ada dan writable
+✓ Set permission folder menjadi 777
+✓ Cek ukuran file, maksimal 2MB
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🎯 RINGKASAN LANGKAH CEPAT:
+
+1. ✓ Jalankan XAMPP Control Panel
+2. ✓ Start Apache & MySQL (keduanya hijau)
+3. ✓ Buka http://localhost/phpmyadmin
+4. ✓ Buat database: adcollection
+5. ✓ Import file: database_setup.sql
+6. ✓ Buka http://localhost/UAS-PW1_AD-COLLECTION/
+7. ✓ Login dengan: admin / password
+8. ✓ SELESAI! Aplikasi siap digunakan
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📊 KONFIGURASI DATABASE:
+
+Database Name    : adcollection
+Database User    : root
+Database Password: (kosong - default XAMPP)
+Database Host    : localhost
+Database Port    : 3306
+
+Apache Port      : 80
+MySQL Port       : 3306
+PHP Version      : 7.4+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+✅ PERSYARATAN PROJECT YANG SUDAH DIPENUHI:
+
+✓ A. Backend & Frontend Terintegrasi
+✓ B. Aplikasi Dashboard
+✓ C. Sistem Register & Login
+✓ D. CRUD Operations (Produk & Pesanan)
+✓ E. Export Data (PDF & Excel)
+✓ F. Session & Cookies Management
+✓ G. Study Case Relevan (Fashion E-Commerce)
+✓ H. Footer dengan Copyright
+✓ I. Links Backend & Frontend
+✓ J. Screenshots & Video (ada di README.md)
+✓ K. Responsive Design
+✓ L. Fitur Tambahan (Multi-platform, Activity Log)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📅 Dibuat: January 14, 2026
+🏫 Universitas Teknologi Bandung - Departemen Bisnis Digital
+   - Multi-platform: TikTok Shop, Shopee, Manual
+   - Real business case dengan inventory management
+
+✅ H. Footer & Copyright
+   Status: SELESAI
+   - Footer di semua halaman dengan format:
+   "© Copyright by Nova Agustina, S.T., M.Kom. | AD COLLECTION"
+   - Link ke E-Learning UTB
+
+✅ I. Links Backend & Frontend + E-Learning
+   Status: SELESAI
+   - Backend/Admin: http://localhost/UAS-PW1_AD-COLLECTION/dashboard.php
+   - Frontend terintegrasi dalam sistem yang sama
+   - Link E-Learning: https://elearning.utb.ac.id
+
+✅ J. Screenshots & Video Documentation
+   Status: READY
+   - README.md sudah siap dengan struktur
+   - Folder /docs untuk screenshots dan video
+
+✅ K. Responsive & Multi-Device
+   Status: SELESAI
+   - Mobile responsive dengan Bootstrap 5
+   - Sidebar yang intuitif
+   - Form validation di frontend dan backend
+
+✅ L. Fitur Tambahan
+   Status: SELESAI
+   - Multi-platform support
+   - Upload foto produk
+   - Activity logging structure
+   - Advanced filtering & statistics
+
+═════════════════════════════════════════════════════════════════════════════════
+🚀 INSTALASI & SETUP LANGKAH DEMI LANGKAH
+═════════════════════════════════════════════════════════════════════════════════
+
+LANGKAH 1: PERSIAPAN
+───────────────────────────────────────────────────────────────────────────────
+- Pastikan XAMPP sudah terinstall (Apache + MySQL)
+- Pastikan folder project ada di: d:\xampp\htdocs\UAS-PW1_AD-COLLECTION\
+
+LANGKAH 2: SETUP DATABASE
+───────────────────────────────────────────────────────────────────────────────
+
+Opsi A - Menggunakan phpMyAdmin:
+1. Buka http://localhost/phpmyadmin
+2. Buat database baru bernama "adcollection"
+3. Pilih database "adcollection"
+4. Klik tab "Import"
+5. Pilih file: database_setup.sql dari project folder
+6. Klik "Go" untuk import
+
+Opsi B - Menggunakan MySQL CLI:
+1. Buka Command Prompt / PowerShell
+2. Navigate ke folder project:
+   cd d:\xampp\htdocs\UAS-PW1_AD-COLLECTION
+3. Jalankan command:
+   mysql -u root -p < database_setup.sql
+   (Tekan Enter jika password kosong)
+
+LANGKAH 3: VERIFIKASI KONFIGURASI DATABASE
+───────────────────────────────────────────────────────────────────────────────
+File: config/database.php
+Pastikan konfigurasi sesuai dengan setup lokal Anda:
+
+define('DB_HOST', 'localhost');    // Host MySQL
+define('DB_USER', 'root');         // Username MySQL
+define('DB_PASS', '');             // Password MySQL (kosong untuk XAMPP default)
+define('DB_NAME', 'adcollection'); // Nama database
+
+LANGKAH 4: START SERVER
+───────────────────────────────────────────────────────────────────────────────
+
+Opsi A - Menggunakan XAMPP:
+1. Buka XAMPP Control Panel
+2. Klik "Start" untuk Apache
+3. Klik "Start" untuk MySQL
+
+Opsi B - Menggunakan PHP Built-in Server (di project folder):
+1. Buka Command Prompt di folder project
+2. Jalankan: php -S localhost:8000
+
+LANGKAH 5: AKSES APLIKASI
+───────────────────────────────────────────────────────────────────────────────
+
+1. Buka Browser (Chrome, Firefox, dll)
+2. Ketik URL: http://localhost/UAS-PW1_AD-COLLECTION/
+   (Akan redirect ke login.php otomatis)
+
+3. Gunakan akun default untuk login:
+   - Username: admin
+   - Email: admin@adcollection.com
+   - Password: password
+
+LANGKAH 6: STRUKTUR FOLDER PROJECT
+───────────────────────────────────────────────────────────────────────────────
+
+UAS-PW1_AD-COLLECTION/
+├── index.php                    ← Landing page (redirect ke login)
+├── login.php                    ← Form login
+├── register.php                 ← Form registrasi
+├── logout.php                   ← Logout user
+├── dashboard.php                ← Dashboard utama
+├── README.md                    ← Dokumentasi lengkap
+├── SETUP_GUIDE.txt              ← File ini
+├── database_setup.sql           ← Database schema & data dummy
+│
+├── config/
+│   └── database.php             ← Konfigurasi database
+│
+├── includes/
+│   ├── header.php               ← HTML header & navbar
+│   ├── sidebar.php              ← Sidebar navigation
+│   └── footer.php               ← Footer dengan copyright
+│
+├── products/
+│   ├── index.php                ← List produk
+│   ├── create.php               ← Form tambah produk
+│   ├── store.php                ← Proses simpan produk
+│   ├── edit.php                 ← Form edit produk
+│   ├── update.php               ← Proses update produk
+│   └── delete.php               ← Proses delete produk
+│
+├── orders/
+│   ├── index.php                ← List pesanan
+│   ├── create.php               ← Form tambah pesanan
+│   ├── store.php                ← Proses simpan pesanan
+│   ├── edit.php                 ← Form edit pesanan
+│   ├── update.php               ← Proses update pesanan
+│   └── delete.php               ← Proses delete pesanan
+│
+├── reports/
+│   ├── index.php                ← Halaman laporan & filter
+│   ├── export_pdf.php           ← Export laporan ke PDF
+│   └── export_excel.php         ← Export data ke Excel
+│
+├── bootstrap/                   ← Bootstrap CSS & JS framework
+│   ├── css/                     ← Bootstrap stylesheets
+│   └── js/                      ← Bootstrap scripts
+│
+└── assets/
+    └── img/
+        └── uploads/             ← Folder upload foto produk
+
+═════════════════════════════════════════════════════════════════════════════════
+📊 FITUR & FUNGSI UTAMA
+═════════════════════════════════════════════════════════════════════════════════
+
+1. AUTHENTICATION (Login & Register)
+   - Registrasi akun baru dengan validasi
+   - Login dengan username/email
+   - Password hashing BCRYPT
+   - Session security
+
+2. DASHBOARD
+   - Statistik penjualan hari ini
+   - Monitoring pesanan pending
+   - Total produk & stok menipis
+   - Chart penjualan per platform
+
+3. PRODUCTS MANAGEMENT
+   - Tambah produk baru dengan SKU unik
+   - Edit data produk
+   - Delete produk
+   - Upload foto produk
+   - Track stok produk
+   - Multi-platform assignment
+
+4. ORDERS MANAGEMENT
+   - Buat pesanan baru dengan detail items
+   - Edit pesanan & status
+   - Delete pesanan
+   - Tracking nomor pesanan otomatis
+   - Multi-platform (TikTok/Shopee/Manual)
+   - Status workflow: Pending → Proses → Dikirim → Selesai
+
+5. REPORTS & EXPORT
+   - Filter laporan berdasarkan bulan/tahun/platform
+   - Export ke PDF (HTML format)
+   - Export ke Excel (CSV format)
+   - Summary statistik penjualan
+
+6. SECURITY
+   - Session validation di setiap halaman
+   - SQL Injection prevention
+   - Password hashing
+   - Secure file upload
+
+═════════════════════════════════════════════════════════════════════════════════
+🔐 AKUN DEFAULT UNTUK TESTING
+═════════════════════════════════════════════════════════════════════════════════
+
+ADMIN ACCOUNT:
+- Username: admin
+- Email: admin@adcollection.com
+- Password: password
+- Role: admin
+
+USER ACCOUNT:
+- Username: nova
+- Email: nova@adcollection.com
+- Password: password
+- Role: user
+
+⚠️  PENTING: Ubah password akun setelah testing sebelum production!
+
+═════════════════════════════════════════════════════════════════════════════════
+🧪 TESTING CHECKLIST
+═════════════════════════════════════════════════════════════════════════════════
+
+Halaman Login:
+☐ Bisa akses http://localhost/UAS-PW1_AD-COLLECTION/login.php
+☐ Bisa login dengan username admin
+☐ Bisa login dengan email admin@adcollection.com
+☐ Error message saat password salah
+☐ Link ke halaman register berfungsi
+
+Halaman Register:
+☐ Bisa akses halaman register
+☐ Bisa membuat akun baru
+☐ Validasi email duplikat
+☐ Validasi password minimal 6 karakter
+☐ Bisa login dengan akun baru
+
+Dashboard:
+☐ Hanya bisa akses jika sudah login
+☐ Menampilkan statistik penjualan
+☐ Menampilkan pesanan pending
+☐ Menampilkan produk terlaris
+☐ Logout berfungsi
+
+Products Management:
+☐ Bisa lihat list produk
+☐ Bisa tambah produk baru
+☐ Bisa upload foto produk
+☐ Bisa edit produk
+☐ Bisa delete produk
+☐ SKU tidak boleh duplikat
+
+Orders Management:
+☐ Bisa lihat list pesanan
+☐ Bisa tambah pesanan baru
+☐ Bisa pilih multiple items dalam satu pesanan
+☐ Kalkulasi total otomatis
+☐ Bisa edit pesanan
+☐ Bisa ubah status pesanan
+☐ Bisa delete pesanan
+
+Reports & Export:
+☐ Bisa filter laporan berdasarkan bulan/tahun
+☐ Bisa filter berdasarkan platform
+☐ Bisa export ke PDF
+☐ Bisa export ke Excel
+☐ Download file berhasil
+
+Security:
+☐ Tidak bisa akses halaman tanpa login
+☐ Auto redirect ke login jika session habis
+☐ Logout menghapus session
+☐ Password ter-hash di database
+
+═════════════════════════════════════════════════════════════════════════════════
+🐛 TROUBLESHOOTING
+═════════════════════════════════════════════════════════════════════════════════
+
+MASALAH: "Koneksi database gagal"
+SOLUSI:
+- Pastikan MySQL sudah running di XAMPP
+- Verifikasi nama database "adcollection" sudah dibuat
+- Cek konfigurasi di config/database.php
+
+MASALAH: "Halaman blank / error 500"
+SOLUSI:
+- Cek error di browser (F12 → Console)
+- Lihat error log XAMPP/Apache
+- Pastikan PHP 7.4+ sudah terinstall
+
+MASALAH: "Tidak bisa upload foto"
+SOLUSI:
+- Pastikan folder assets/img/uploads/ ada
+- Cek permission folder (644 atau 755)
+- File size harus < 2MB
+
+MASALAH: "Session tidak bekerja"
+SOLUSI:
+- Pastikan session_start() di awal setiap file
+- Cek cookies di browser setting
+- Clear browser cache & cookies
+
+MASALAH: "Export PDF/Excel tidak download"
+SOLUSI:
+- Cek apakah header sudah dikirim
+- Pastikan query tidak kosong
+- Cek file permission
+
+═════════════════════════════════════════════════════════════════════════════════
+📝 LANGKAH SELANJUTNYA UNTUK DEPLOYMENT
+═════════════════════════════════════════════════════════════════════════════════
+
+1. Buat screenshots dari setiap halaman penting
+2. Buat video demo project (3-5 menit)
+3. Update README.md dengan screenshots & video links
+4. Test semua fitur CRUD & export
+5. Verifikasi semua persyaratan UAS terpenuhi
+6. Kompres project menjadi ZIP
+7. Submit project ke LMS E-Learning
+
+═════════════════════════════════════════════════════════════════════════════════
+💡 TIPS & BEST PRACTICES
+═════════════════════════════════════════════════════════════════════════════════
+
+1. Selalu gunakan prepared statements untuk query (prevent SQL injection)
+2. Hash password dengan password_hash() atau BCRYPT
+3. Validate input di frontend DAN backend
+4. Set proper folder permission untuk security
+5. Backup database secara regular
+6. Monitor error logs secara berkala
+7. Test di multiple browsers (Chrome, Firefox, Safari)
+8. Optimize database queries dengan indexing
+9. Use consistent naming convention
+10. Document code dengan comments yang jelas
+
+═════════════════════════════════════════════════════════════════════════════════
+📞 SUPPORT & CONTACT
+═════════════════════════════════════════════════════════════════════════════════
+
+Pertanyaan atau masalah? Hubungi:
+- Email: support@adcollection.com
+- WhatsApp: [Link WhatsApp Group]
+- Forum: [Forum Link]
+
+═════════════════════════════════════════════════════════════════════════════════
+Selesai! Project siap untuk digunakan. Semoga sukses! 🎉
+═════════════════════════════════════════════════════════════════════════════════
