@@ -1,0 +1,43 @@
+# Sensitive Files
+config/database.php
+.env
+.env.local
+
+# IDE Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-*
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Backup Files
+*.bak
+*.tmp
+*~
+*.log
+
+# Cache & Temporary
+.cache/
+tmp/
+temp/
+
+# Dependencies
+vendor/
+node_modules/
+composer.lock
+package-lock.json
+
+# Database
+*.sql.bak
+dump.sql
+
+# Build & Distribution
+dist/
+build/
+*.min.js
+*.min.css
