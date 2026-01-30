@@ -110,11 +110,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             border: 2px solid #e0e0e0;
             padding: 12px;
             font-size: 14px;
+            margin-bottom: 15px;
+            border-radius: 6px;
         }
         
         .form-control:focus {
             border-color: var(--secondary-gold);
             box-shadow: 0 0 0 0.2rem rgba(201, 169, 126, 0.25);
+        }
+        
+        .form-label {
+            font-weight: 500;
+            color: var(--primary-brown);
+            margin-bottom: 8px;
+            font-size: 13px;
         }
         
         .btn-login {
@@ -147,6 +156,58 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
         .login-footer a:hover {
             text-decoration: underline;
+        }
+        
+        /* Responsive Login */
+        @media (max-width: 576px) {
+            body {
+                padding: 15px;
+                min-height: auto;
+            }
+            
+            .login-container {
+                max-width: 100%;
+                padding: 25px 20px;
+                margin: 0;
+                border-radius: 12px;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            }
+            
+            .login-header {
+                margin-bottom: 25px;
+            }
+            
+            .login-header h2 {
+                font-size: 28px;
+                margin-bottom: 8px;
+            }
+            
+            .login-header p {
+                font-size: 13px;
+            }
+            
+            .form-group {
+                margin-bottom: 15px;
+            }
+            
+            .form-control {
+                padding: 12px;
+                font-size: 14px;
+                margin-bottom: 12px;
+                border-radius: 6px;
+            }
+            
+            .btn-login {
+                padding: 12px;
+                font-size: 15px;
+                margin-top: 10px;
+                border-radius: 6px;
+            }
+            
+            .login-footer {
+                font-size: 13px;
+                margin-top: 18px;
+            }
         }
         
         .alert {

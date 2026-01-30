@@ -23,7 +23,7 @@ include '../includes/header.php';
     <div class="row">
         <?php include '../includes/sidebar.php'; ?>
         
-        <main class="col-md-10 main-content">
+        <main class="col-12 col-md-10 main-content">
             <!-- Page Header -->
             <div class="page-header">
                 <div class="d-flex justify-content-between align-items-center">
@@ -77,7 +77,7 @@ include '../includes/header.php';
                                             <td><?= $no++ ?></td>
                                             <td>
                                                 <span class="badge" style="background: linear-gradient(135deg, #6c757d 0%, #495057 100%);">
-                                                    <?= $product['kode'] ?>
+                                                    <?= $product['sku'] ?>
                                                 </span>
                                             </td>
                                             <td>
@@ -89,7 +89,7 @@ include '../includes/header.php';
                                                 <span class="badge bg-info"><?= $product['kategori'] ?></span>
                                             </td>
                                             <td>
-                                                <strong style="color: #28a745;"><?= rupiah($product['harga']) ?></strong>
+                                                <strong style="color: #28a745;"><?= rupiah($product['harga_jual']) ?></strong>
                                             </td>
                                             <td>
                                                 <?php if($product['stok'] < 10): ?>
@@ -101,8 +101,8 @@ include '../includes/header.php';
                                                 <?php endif; ?>
                                             </td>
                                             <td>
-                                                <?php if($product['foto']): ?>
-                                                    <img src="../assets/img/uploads/<?= $product['foto'] ?>" 
+                                                <?php if($product['foto_produk']): ?>
+                                                    <img src="../assets/img/uploads/<?= $product['foto_produk'] ?>" 
                                                          class="rounded" 
                                                          style="width: 60px; height: 60px; object-fit: cover; border: 2px solid var(--light-cream);">
                                                 <?php else: ?>

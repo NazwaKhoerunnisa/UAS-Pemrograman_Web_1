@@ -4,30 +4,31 @@ session_start();
 require_once '../config/database.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $kode = escape($_POST['kode']);
+    $sku = escape($_POST['sku']);
     $nama_produk = escape($_POST['nama_produk']);
     $kategori = escape($_POST['kategori']);
-    $harga = escape($_POST['harga']);
-    $stok = escape($_POST['stok']);
+    $harga_beli = floatval($_POST['harga_beli']);
+    $harga_jual = floatval($_POST['harga_jual']);
+    $stok = intval($_POST['stok']);
     $deskripsi = escape($_POST['deskripsi']);
     
-    // Cek apakah kode sudah ada
-    $check_query = "SELECT * FROM products WHERE kode = '$kode'";
+    // Cek apakah sku sudah ada
+    $check_query = "SELECT * FROM products WHERE sku = '$sku'";
     $check_result = mysqli_query($conn, $check_query);
     
     if (mysqli_num_rows($check_result) > 0) {
-        $_SESSION['error'] = "Kode produk '$kode' sudah digunakan!";
+        $_SESSION['error'] = "SKU produk '$sku' sudah digunakan!";
         header("Location: create.php");
         exit();
     }
     
     // Upload foto
-    $foto = NULL;
+    $foto_produk = NULL;
     if (isset($_FILES['foto']) && $_FILES['foto']['error'] != 4) {
         $upload_result = upload_foto($_FILES['foto']);
         
         if ($upload_result['status']) {
-            $foto = $upload_result['filename'];
+            $foto_produk = $upload_result['filename'];
         } else {
             $_SESSION['error'] = $upload_result['message'];
             header("Location: create.php");
@@ -36,9 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     
     // Insert ke database
-    $query = "INSERT INTO products (kode, nama_produk, kategori, harga, stok, deskripsi, foto) 
-              VALUES ('$kode', '$nama_produk', '$kategori', '$harga', '$stok', '$deskripsi', " . 
-              ($foto ? "'$foto'" : "NULL") . ")";
+    $query = "INSERT INTO products (sku, nama_produk, kategori, harga_beli, harga_jual, stok, deskripsi, foto_produk) 
+              VALUES ('$sku', '$nama_produk', '$kategori', $harga_beli, $harga_jual, $stok, '$deskripsi', " . 
+              ($foto_produk ? "'$foto_produk'" : "NULL") . ")";
     
     if (mysqli_query($conn, $query)) {
         $_SESSION['success'] = "Produk '$nama_produk' berhasil ditambahkan!";

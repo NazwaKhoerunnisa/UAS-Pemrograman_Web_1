@@ -15,11 +15,14 @@ $filter_bulan = $_GET['bulan'] ?? date('m');
 $filter_tahun = $_GET['tahun'] ?? date('Y');
 
 if ($filter_type == 'orders') {
-    $query = "SELECT kode_order, tanggal, nama_customer, telepon, alamat, platform, status, total 
-              FROM orders WHERE MONTH(tanggal) = '$filter_bulan' AND YEAR(tanggal) = '$filter_tahun'";
+    $bulan_int = (int)$filter_bulan;
+    $tahun_int = (int)$filter_tahun;
+    $query = "SELECT nomor_pesanan, tanggal, nama_pembeli, nomor_telepon, alamat_pengiriman, platform, status, total 
+              FROM orders WHERE MONTH(tanggal) = $bulan_int AND YEAR(tanggal) = $tahun_int AND status = 'selesai'";
     
     if (!empty($filter_platform)) {
-        $query .= " AND platform = '$filter_platform'";
+        $platform_safe = mysqli_real_escape_string($conn, $filter_platform);
+        $query .= " AND platform = '$platform_safe'";
     }
     
     $query .= " ORDER BY tanggal DESC";
@@ -27,7 +30,7 @@ if ($filter_type == 'orders') {
     $filename = 'Laporan_Penjualan_' . date('Y-m-d');
     
 } else {
-    $query = "SELECT id, kode, nama_produk, kategori, harga, stok FROM products ORDER BY id DESC";
+    $query = "SELECT id, sku, nama_produk, kategori, harga_jual, stok FROM products ORDER BY id DESC";
     $data = mysqli_query($conn, $query);
     $filename = 'Data_Produk_' . date('Y-m-d');
 }
@@ -53,11 +56,11 @@ echo implode("\t", $headers) . "\n";
 while ($row = mysqli_fetch_assoc($data)) {
     if ($filter_type == 'orders') {
         $values = [
-            $row['kode_order'],
+            $row['nomor_pesanan'],
             $row['tanggal'],
-            $row['nama_customer'],
-            $row['telepon'],
-            $row['alamat'],
+            $row['nama_pembeli'],
+            $row['nomor_telepon'],
+            $row['alamat_pengiriman'],
             ucfirst($row['platform']),
             strtoupper($row['status']),
             $row['total']
@@ -65,10 +68,10 @@ while ($row = mysqli_fetch_assoc($data)) {
     } else {
         $values = [
             $row['id'],
-            $row['kode'],
+            $row['sku'],
             $row['nama_produk'],
             $row['kategori'],
-            $row['harga'],
+            $row['harga_jual'],
             $row['stok']
         ];
     }
@@ -85,4 +88,3 @@ while ($row = mysqli_fetch_assoc($data)) {
 }
 
 exit();
-?>

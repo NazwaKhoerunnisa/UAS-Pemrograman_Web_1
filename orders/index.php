@@ -23,7 +23,7 @@ include '../includes/header.php';
     <div class="row">
         <?php include '../includes/sidebar.php'; ?>
         
-        <main class="col-md-10 main-content">
+        <main class="col-12 col-md-10 main-content">
             <!-- Page Header -->
             <div class="page-header">
                 <div class="d-flex justify-content-between align-items-center">
@@ -60,13 +60,12 @@ include '../includes/header.php';
                             <thead>
                                 <tr>
                                     <th width="5%">No</th>
-                                    <th width="12%">Kode Order</th>
+                                    <th width="12%">No. Pesanan</th>
                                     <th width="10%">Tanggal</th>
-                                    <th width="18%">Customer</th>
+                                    <th width="18%">Pembeli</th>
                                     <th width="10%">Platform</th>
                                     <th width="12%">Total</th>
-                                    <th width="10%">Status</th>
-                                    <th width="10%">Resi</th>
+                                    <th width="12%">Status</th>
                                     <th width="13%">Aksi</th>
                                 </tr>
                             </thead>
@@ -77,13 +76,13 @@ include '../includes/header.php';
                                         <tr>
                                             <td><?= $no++ ?></td>
                                             <td>
-                                                <strong style="color: var(--primary-brown);"><?= $order['kode_order'] ?></strong>
+                                                <strong style="color: var(--primary-brown);"><?= $order['nomor_pesanan'] ?></strong>
                                             </td>
                                             <td><?= tanggal_indo($order['tanggal']) ?></td>
                                             <td>
-                                                <strong><?= $order['nama_customer'] ?></strong>
+                                                <strong><?= $order['nama_pembeli'] ?></strong>
                                                 <br>
-                                                <small class="text-muted"><?= $order['telepon'] ?></small>
+                                                <small class="text-muted"><?= $order['nomor_telepon'] ?></small>
                                             </td>
                                             <td>
                                                 <?php if($order['platform'] == 'tiktok'): ?>
@@ -103,29 +102,18 @@ include '../includes/header.php';
                                                 <?php
                                                 $badge_class = [
                                                     'pending' => 'bg-warning text-dark',
-                                                    'diproses' => 'bg-info',
+                                                    'proses' => 'bg-info',
                                                     'dikirim' => 'bg-primary',
-                                                    'selesai' => 'bg-success'
+                                                    'selesai' => 'bg-success',
+                                                    'batal' => 'bg-danger'
                                                 ];
                                                 ?>
-                                                <span class="badge <?= $badge_class[$order['status']] ?>">
+                                                <span class="badge <?= $badge_class[$order['status']] ?? 'bg-secondary' ?>">
                                                     <?= ucfirst($order['status']) ?>
                                                 </span>
                                             </td>
                                             <td>
-                                                <?php if($order['resi']): ?>
-                                                    <small class="badge bg-secondary"><?= $order['resi'] ?></small>
-                                                <?php else: ?>
-                                                    <small class="text-muted">-</small>
-                                                <?php endif; ?>
-                                            </td>
-                                            <td>
                                                 <div class="btn-group" role="group">
-                                                    <a href="detail.php?id=<?= $order['id'] ?>" 
-                                                       class="btn btn-sm btn-info text-white"
-                                                       title="Lihat Detail">
-                                                        <i class="bi bi-eye"></i> Lihat
-                                                    </a>
                                                     <a href="edit.php?id=<?= $order['id'] ?>" 
                                                        class="btn btn-sm btn-primary"
                                                        title="Edit">
@@ -133,7 +121,7 @@ include '../includes/header.php';
                                                     </a>
                                                     <a href="delete.php?id=<?= $order['id'] ?>" 
                                                        class="btn btn-sm btn-danger"
-                                                       onclick="return confirm('Yakin ingin menghapus pesanan <?= $order['kode_order'] ?>?')"
+                                                       onclick="return confirm('Yakin ingin menghapus pesanan <?= $order['nomor_pesanan'] ?>?')"
                                                        title="Hapus">
                                                         <i class="bi bi-trash"></i> Hapus
                                                     </a>
@@ -143,7 +131,7 @@ include '../includes/header.php';
                                     <?php endwhile; ?>
                                 <?php else: ?>
                                     <tr>
-                                        <td colspan="9" class="text-center py-5">
+                                        <td colspan="8" class="text-center py-5">
                                             <i class="bi bi-inbox" style="font-size: 50px; color: var(--secondary-gold); opacity: 0.3;"></i>
                                             <p class="text-muted mt-3 mb-0">Belum ada pesanan. <a href="create.php" style="color: var(--primary-brown);">Tambah pesanan pertama</a></p>
                                         </td>

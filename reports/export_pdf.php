@@ -13,21 +13,24 @@ $filter_platform = $_GET['platform'] ?? '';
 $filter_bulan = $_GET['bulan'] ?? date('m');
 $filter_tahun = $_GET['tahun'] ?? date('Y');
 
-// Query laporan penjualan
-$query = "SELECT * FROM orders WHERE MONTH(tanggal) = '$filter_bulan' AND YEAR(tanggal) = '$filter_tahun'";
+// Query laporan penjualan - hanya status selesai
+$bulan_int = (int)$filter_bulan;
+$tahun_int = (int)$filter_tahun;
+$query = "SELECT * FROM orders WHERE MONTH(tanggal) = $bulan_int AND YEAR(tanggal) = $tahun_int AND status = 'selesai'";
 
 if (!empty($filter_platform)) {
-    $query .= " AND platform = '$filter_platform'";
+    $platform_safe = mysqli_real_escape_string($conn, $filter_platform);
+    $query .= " AND platform = '$platform_safe'";
 }
 
 $query .= " ORDER BY tanggal DESC";
 $reports = mysqli_query($conn, $query);
 
-// Hitung total
+// Hitung total - hanya status selesai
 $total_query = "SELECT COUNT(*) as total_pesanan, SUM(total) as total_penjualan FROM orders 
-                WHERE MONTH(tanggal) = '$filter_bulan' AND YEAR(tanggal) = '$filter_tahun'";
+                WHERE MONTH(tanggal) = $bulan_int AND YEAR(tanggal) = $tahun_int AND status = 'selesai'";
 if (!empty($filter_platform)) {
-    $total_query .= " AND platform = '$filter_platform'";
+    $total_query .= " AND platform = '$platform_safe'";
 }
 
 $total_result = mysqli_query($conn, $total_query);
@@ -110,7 +113,7 @@ $html = '
     </div>
     
     <div class="info">
-        <p><strong>Periode:</strong> ' . strftime('%B %Y', mktime(0, 0, 0, $filter_bulan, 1, $filter_tahun)) . '</p>
+        <p><strong>Periode:</strong> ' . ($filter_bulan ? date('F Y', mktime(0, 0, 0, $filter_bulan, 1, $filter_tahun)) : 'Semua Bulan') . '</p>
         <p><strong>Platform:</strong> ' . (!empty($filter_platform) ? strtoupper($filter_platform) : 'Semua Platform') . '</p>
         <p><strong>Dibuat pada:</strong> ' . date('d-m-Y H:i:s') . '</p>
     </div>
@@ -133,9 +136,9 @@ $no = 1;
 while ($row = mysqli_fetch_assoc($reports)) {
     $html .= '<tr>
         <td>' . $no++ . '</td>
-        <td>' . $row['kode_order'] . '</td>
+        <td>' . $row['nomor_pesanan'] . '</td>
         <td>' . tanggal_indo($row['tanggal']) . '</td>
-        <td>' . $row['nama_customer'] . '</td>
+        <td>' . $row['nama_pembeli'] . '</td>
         <td>' . ucfirst($row['platform']) . '</td>
         <td>' . strtoupper($row['status']) . '</td>
         <td>Rp ' . number_format($row['total'], 0, ',', '.') . '</td>
@@ -321,5 +324,3 @@ header('Pragma: no-cache');
 header('Expires: 0');
 
 echo $html_print;
-?>
-?>

@@ -16,21 +16,24 @@ $filter_platform = $_GET['platform'] ?? '';
 $filter_bulan = $_GET['bulan'] ?? date('m');
 $filter_tahun = $_GET['tahun'] ?? date('Y');
 
-// Query laporan penjualan
-$query = "SELECT * FROM orders WHERE MONTH(tanggal) = '$filter_bulan' AND YEAR(tanggal) = '$filter_tahun'";
+// Query laporan penjualan - hanya status selesai
+$bulan_int = (int)$filter_bulan;
+$tahun_int = (int)$filter_tahun;
+$query = "SELECT * FROM orders WHERE MONTH(tanggal) = $bulan_int AND YEAR(tanggal) = $tahun_int AND status = 'selesai'";
 
 if (!empty($filter_platform)) {
-    $query .= " AND platform = '$filter_platform'";
+    $platform_safe = mysqli_real_escape_string($conn, $filter_platform);
+    $query .= " AND platform = '$platform_safe'";
 }
 
 $query .= " ORDER BY tanggal DESC";
 $reports = mysqli_query($conn, $query);
 
-// Total penjualan
+// Total penjualan - hanya status selesai
 $total_query = "SELECT COUNT(*) as total_pesanan, SUM(total) as total_penjualan FROM orders 
-                WHERE MONTH(tanggal) = '$filter_bulan' AND YEAR(tanggal) = '$filter_tahun'";
+                WHERE MONTH(tanggal) = $bulan_int AND YEAR(tanggal) = $tahun_int AND status = 'selesai'";
 if (!empty($filter_platform)) {
-    $total_query .= " AND platform = '$filter_platform'";
+    $total_query .= " AND platform = '$platform_safe'";
 }
 
 $total_result = mysqli_query($conn, $total_query);
@@ -43,7 +46,7 @@ include '../includes/header.php';
     <div class="row">
         <?php include '../includes/sidebar.php'; ?>
         
-        <main class="col-md-10 main-content">
+        <main class="col-12 col-md-10 main-content">
             <div class="page-header">
                 <h2><i class="bi bi-file-earmark-bar-graph"></i> Laporan Penjualan</h2>
             </div>
@@ -55,10 +58,14 @@ include '../includes/header.php';
                         <div class="col-md-4">
                             <label for="bulan" class="form-label">Bulan</label>
                             <select class="form-select" id="bulan" name="bulan">
-                                <?php for ($i = 1; $i <= 12; $i++): ?>
-                                    <option value="<?= str_pad($i, 2, '0', STR_PAD_LEFT); ?>" 
-                                            <?= $filter_bulan == str_pad($i, 2, '0', STR_PAD_LEFT) ? 'selected' : ''; ?>>
-                                        <?= strftime('%B', mktime(0, 0, 0, $i, 1)); ?>
+                                <?php 
+                                $nama_bulan = ['', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+                                for ($i = 1; $i <= 12; $i++): 
+                                    $bulan_pad = str_pad($i, 2, '0', STR_PAD_LEFT);
+                                    $is_selected = ((int)$filter_bulan === $i) ? 'selected' : '';
+                                ?>
+                                    <option value="<?= $bulan_pad; ?>" <?= $is_selected; ?>>
+                                        <?= $nama_bulan[$i]; ?>
                                     </option>
                                 <?php endfor; ?>
                             </select>
@@ -68,7 +75,7 @@ include '../includes/header.php';
                             <label for="tahun" class="form-label">Tahun</label>
                             <select class="form-select" id="tahun" name="tahun">
                                 <?php for ($y = date('Y') - 5; $y <= date('Y'); $y++): ?>
-                                    <option value="<?= $y; ?>" <?= $filter_tahun == $y ? 'selected' : ''; ?>>
+                                    <option value="<?= $y; ?>" <?= (int)$filter_tahun === $y ? 'selected' : ''; ?>>
                                         <?= $y; ?>
                                     </option>
                                 <?php endfor; ?>
@@ -142,9 +149,9 @@ include '../includes/header.php';
                             <tbody>
                                 <?php while ($row = mysqli_fetch_assoc($reports)): ?>
                                     <tr>
-                                        <td><strong><?= $row['kode_order']; ?></strong></td>
+                                        <td><strong><?= $row['nomor_pesanan']; ?></strong></td>
                                         <td><?= tanggal_indo($row['tanggal']); ?></td>
-                                        <td><?= $row['nama_customer']; ?></td>
+                                        <td><?= $row['nama_pembeli']; ?></td>
                                         <td>
                                             <?php if ($row['platform'] == 'tiktok'): ?>
                                                 <span class="badge bg-dark">TikTok Shop</span>

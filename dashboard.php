@@ -48,7 +48,7 @@ $persentase_tiktok = $total_penjualan > 0 ? ($penjualan_tiktok / $total_penjuala
 $persentase_shopee = $total_penjualan > 0 ? ($penjualan_shopee / $total_penjualan) * 100 : 0;
 
 // Produk terlaris - dengan error handling
-$query_terlaris = "SELECT p.id, p.nama_produk, p.foto, COALESCE(SUM(oi.jumlah), 0) as total_terjual 
+$query_terlaris = "SELECT p.id, p.nama_produk, p.foto_produk, COALESCE(SUM(oi.jumlah), 0) as total_terjual 
                    FROM products p 
                    LEFT JOIN order_items oi ON p.id = oi.product_id 
                    GROUP BY p.id 
@@ -58,7 +58,7 @@ $produk_terlaris = mysqli_query($conn, $query_terlaris);
 
 if (!$produk_terlaris) {
     // Jika query produk terlaris gagal, gunakan query sederhana
-    $query_terlaris = "SELECT id, nama_produk, foto FROM products ORDER BY id DESC LIMIT 5";
+    $query_terlaris = "SELECT id, nama_produk, foto_produk FROM products ORDER BY id DESC LIMIT 5";
     $produk_terlaris = mysqli_query($conn, $query_terlaris);
 }
 
@@ -73,7 +73,7 @@ include 'includes/header.php';
     <div class="row">
         <?php include 'includes/sidebar.php'; ?>
         
-        <main class="col-md-10 main-content">
+        <main class="col-12 col-md-10 main-content">
             <!-- Page Header -->
             <div class="page-header">
                 <div class="d-flex justify-content-between align-items-center">
@@ -218,8 +218,8 @@ include 'includes/header.php';
                                                 <?= $rank++ ?>
                                             </div>
                                             <div class="me-3" style="width: 60px; height: 60px; border-radius: 10px; overflow: hidden; background: var(--light-cream);">
-                                                <?php if(!empty($item['foto']) && file_exists('assets/img/uploads/' . $item['foto'])): ?>
-                                                    <img src="assets/img/uploads/<?= htmlspecialchars($item['foto']) ?>" 
+                                                <?php if(!empty($item['foto_produk']) && file_exists('assets/img/uploads/' . $item['foto_produk'])): ?>
+                                                    <img src="assets/img/uploads/<?= htmlspecialchars($item['foto_produk']) ?>" 
                                                          style="width: 100%; height: 100%; object-fit: cover;" alt="<?= htmlspecialchars($item['nama_produk']) ?>">
                                                 <?php else: ?>
                                                     <div class="w-100 h-100 d-flex align-items-center justify-content-center">
@@ -279,9 +279,9 @@ include 'includes/header.php';
                                         <?php if(mysqli_num_rows($pesanan_terbaru) > 0): ?>
                                             <?php while($order = mysqli_fetch_assoc($pesanan_terbaru)): ?>
                                                 <tr>
-                                                    <td><strong><?= $order['kode_order'] ?></strong></td>
+                                                    <td><strong><?= $order['nomor_pesanan'] ?></strong></td>
                                                     <td><?= tanggal_indo($order['tanggal']) ?></td>
-                                                    <td><?= $order['nama_customer'] ?></td>
+                                                    <td><?= $order['nama_pembeli'] ?></td>
                                                     <td>
                                                         <?php if($order['platform'] == 'tiktok'): ?>
                                                             <span class="badge bg-danger">
@@ -298,12 +298,14 @@ include 'includes/header.php';
                                                         <?php
                                                         $badge_class = [
                                                             'pending' => 'bg-warning text-dark',
-                                                            'diproses' => 'bg-info',
+                                                            'proses' => 'bg-info',
                                                             'dikirim' => 'bg-primary',
-                                                            'selesai' => 'bg-success'
+                                                            'selesai' => 'bg-success',
+                                                            'batal' => 'bg-danger'
                                                         ];
+                                                        $status_class = isset($badge_class[$order['status']]) ? $badge_class[$order['status']] : 'bg-secondary';
                                                         ?>
-                                                        <span class="badge <?= $badge_class[$order['status']] ?>">
+                                                        <span class="badge <?= $status_class ?>">
                                                             <?= ucfirst($order['status']) ?>
                                                         </span>
                                                     </td>

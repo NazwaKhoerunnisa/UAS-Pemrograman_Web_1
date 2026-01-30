@@ -39,7 +39,7 @@ include '../includes/header.php';
     <div class="row">
         <?php include '../includes/sidebar.php'; ?>
         
-        <main class="col-md-10 main-content">
+        <main class="col-12 col-md-10 main-content">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2 style="color: var(--primary-brown);">
                     <i class="bi bi-pencil"></i> Edit Produk
@@ -56,13 +56,13 @@ include '../includes/header.php';
                 <div class="card-body p-4">
                     <form action="update.php" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="id" value="<?= $product['id'] ?>">
-                        <input type="hidden" name="foto_lama" value="<?= $product['foto'] ?>">
+                        <input type="hidden" name="foto_lama" value="<?= $product['foto_produk'] ?>">
                         
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Kode Produk <span class="text-danger">*</span></label>
-                                <input type="text" name="kode" class="form-control" 
-                                       value="<?= $product['kode'] ?>" required>
+                                <label class="form-label">SKU <span class="text-danger">*</span></label>
+                                <input type="text" name="sku" class="form-control" 
+                                       value="<?= $product['sku'] ?>" required>
                             </div>
 
                             <div class="col-md-6 mb-3">
@@ -85,9 +85,9 @@ include '../includes/header.php';
                             </div>
 
                             <div class="col-md-4 mb-3">
-                                <label class="form-label">Harga <span class="text-danger">*</span></label>
-                                <input type="number" name="harga" class="form-control" 
-                                       value="<?= $product['harga'] ?>" required min="0" step="1000">
+                                <label class="form-label">Harga Jual <span class="text-danger">*</span></label>
+                                <input type="number" name="harga_jual" class="form-control" 
+                                       value="<?= $product['harga_jual'] ?>" required min="0" step="1000">
                             </div>
 
                             <div class="col-md-4 mb-3">
@@ -104,10 +104,10 @@ include '../includes/header.php';
                             <div class="col-md-12 mb-3">
                                 <label class="form-label">Foto Produk</label>
                                 
-                                <?php if($product['foto']): ?>
+                                <?php if($product['foto_produk']): ?>
                                     <div class="mb-3">
                                         <p class="mb-2" style="color: var(--primary-brown); font-weight: 600;">Foto Saat Ini:</p>
-                                        <img src="../assets/img/uploads/<?= $product['foto'] ?>" 
+                                        <img src="../assets/img/uploads/<?= $product['foto_produk'] ?>" 
                                              class="rounded" 
                                              style="max-width: 250px; border: 3px solid var(--secondary-gold);">
                                     </div>

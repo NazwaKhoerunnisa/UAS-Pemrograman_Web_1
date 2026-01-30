@@ -33,6 +33,18 @@ CREATE TABLE IF NOT EXISTS products (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Tabel product_variations (untuk variasi produk seperti warna, ukuran)
+CREATE TABLE IF NOT EXISTS product_variations (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    product_id INT NOT NULL,
+    nama_variasi VARCHAR(50) NOT NULL,
+    nilai_variasi VARCHAR(50) NOT NULL,
+    stok INT NOT NULL DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- Tabel orders (CRUD Pesanan)
 CREATE TABLE IF NOT EXISTS orders (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -78,18 +90,104 @@ CREATE TABLE IF NOT EXISTS activity_logs (
 INSERT INTO users (nama_lengkap, email, username, password, role) VALUES
 ('Administrator', 'admin@adcollection.com', 'admin', '$2y$10$Prlun718lJbUneCGag5HlO9i29HNvhnMbjjSoCLvSWbrANgLn5Ldu', 'admin');
 
+-- Insert 6 produk blouse
 INSERT INTO products (nama_produk, sku, kategori, deskripsi, harga_beli, harga_jual, stok, platform) VALUES
-('Hijab Viscose Polos', 'HV001', 'Hijab', 'Hijab viscose premium polos tersedia berbagai warna', 15000, 35000, 50, 'tiktok'),
-('Hijab Motif Bunga', 'HM001', 'Hijab', 'Hijab dengan motif bunga yang indah dan modern', 18000, 42000, 35, 'shopee'),
-('Gamis Katun Tebal', 'GK001', 'Gamis', 'Gamis katun tebal nyaman untuk dipakai sehari-hari', 35000, 85000, 20, 'tiktok'),
-('Kerudung Anak', 'KA001', 'Hijab Anak', 'Kerudung untuk anak-anak dengan warna cerah', 12000, 28000, 45, 'manual');
+('Kanaya Blouse', 'KB001', 'Blouse', 'Kanaya Blouse berkualitas premium dengan bahan nyaman', 75000, 150000, 120, 'manual'),
+('Alesya Blouse', 'AB001', 'Blouse', 'Alesya Blouse desain modern dan elegan', 75000, 150000, 120, 'manual'),
+('Arini Blouse', 'AR001', 'Blouse', 'Arini Blouse dengan potongan yang sempurna', 75000, 150000, 120, 'manual'),
+('Friska Blouse', 'FR001', 'Blouse', 'Friska Blouse dengan detail unik dan menarik', 75000, 150000, 120, 'manual'),
+('Nadlyne Blouse', 'NA001', 'Blouse', 'Nadlyne Blouse untuk penampilan sempurna Anda', 75000, 150000, 120, 'manual'),
+('Safana Blouse', 'SA001', 'Blouse', 'Safana Blouse dengan kualitas terbaik', 75000, 150000, 120, 'manual');
 
-INSERT INTO orders (nomor_pesanan, user_id, nama_pembeli, email_pembeli, nomor_telepon, alamat_pengiriman, platform, status, total, tanggal) VALUES
-('PES001', 1, 'Budi Santoso', 'budi@email.com', '08123456789', 'Jalan Merdeka No.10, Jakarta', 'tiktok', 'pending', 210000, CURDATE()),
-('PES002', 2, 'Siti Nurhaliza', 'siti@email.com', '08987654321', 'Jalan Sultan No.5, Bandung', 'shopee', 'proses', 127000, CURDATE());
+-- Insert variasi warna untuk setiap produk (6 warna x 6 produk = 36 variasi)
+-- Kanaya Blouse (ID 1)
+INSERT INTO product_variations (product_id, nama_variasi, nilai_variasi, stok) VALUES
+(1, 'Warna', 'Hitam', 20),
+(1, 'Warna', 'Denim', 20),
+(1, 'Warna', 'Burgundy', 20),
+(1, 'Warna', 'Olive', 20),
+(1, 'Warna', 'Cream', 20),
+(1, 'Warna', 'Mustard', 20);
 
+-- Alesya Blouse (ID 2)
+INSERT INTO product_variations (product_id, nama_variasi, nilai_variasi, stok) VALUES
+(2, 'Warna', 'Hitam', 20),
+(2, 'Warna', 'Denim', 20),
+(2, 'Warna', 'Burgundy', 20),
+(2, 'Warna', 'Olive', 20),
+(2, 'Warna', 'Cream', 20),
+(2, 'Warna', 'Mustard', 20);
+
+-- Arini Blouse (ID 3)
+INSERT INTO product_variations (product_id, nama_variasi, nilai_variasi, stok) VALUES
+(3, 'Warna', 'Hitam', 20),
+(3, 'Warna', 'Denim', 20),
+(3, 'Warna', 'Burgundy', 20),
+(3, 'Warna', 'Olive', 20),
+(3, 'Warna', 'Cream', 20),
+(3, 'Warna', 'Mustard', 20);
+
+-- Friska Blouse (ID 4)
+INSERT INTO product_variations (product_id, nama_variasi, nilai_variasi, stok) VALUES
+(4, 'Warna', 'Hitam', 20),
+(4, 'Warna', 'Denim', 20),
+(4, 'Warna', 'Burgundy', 20),
+(4, 'Warna', 'Olive', 20),
+(4, 'Warna', 'Cream', 20),
+(4, 'Warna', 'Mustard', 20);
+
+-- Nadlyne Blouse (ID 5)
+INSERT INTO product_variations (product_id, nama_variasi, nilai_variasi, stok) VALUES
+(5, 'Warna', 'Hitam', 20),
+(5, 'Warna', 'Denim', 20),
+(5, 'Warna', 'Burgundy', 20),
+(5, 'Warna', 'Olive', 20),
+(5, 'Warna', 'Cream', 20),
+(5, 'Warna', 'Mustard', 20);
+
+-- Safana Blouse (ID 6)
+INSERT INTO product_variations (product_id, nama_variasi, nilai_variasi, stok) VALUES
+(6, 'Warna', 'Hitam', 20),
+(6, 'Warna', 'Denim', 20),
+(6, 'Warna', 'Burgundy', 20),
+(6, 'Warna', 'Olive', 20),
+(6, 'Warna', 'Cream', 20),
+(6, 'Warna', 'Mustard', 20);
+
+-- Insert data pesanan
+INSERT INTO orders (nomor_pesanan, user_id, nama_pembeli, email_pembeli, nomor_telepon, alamat_pengiriman, platform, status, total, tanggal, catatan) VALUES
+('PES001', 1, 'Budi Santoso', 'budi@email.com', '08123456789', 'Jalan Merdeka No.10, Jakarta', 'tiktok', 'selesai', 450000, '2026-01-15', 'Pengiriman JNE'),
+('PES002', 1, 'Siti Nurhaliza', 'siti@email.com', '08987654321', 'Jalan Sultan No.5, Bandung', 'shopee', 'dikirim', 300000, '2026-01-18', 'Paket sedang'),
+('PES003', 1, 'Ahmad Wijaya', 'ahmad@email.com', '08567890123', 'Jalan Sudirman No.20, Surabaya', 'tiktok', 'proses', 150000, '2026-01-20', 'Tunggu transfer'),
+('PES004', 1, 'Rina Puspita', 'rina@email.com', '08456789012', 'Jalan Diponegoro No.15, Medan', 'shopee', 'pending', 300000, '2026-01-22', 'Baru order'),
+('PES005', 1, 'Hendra Gunawan', 'hendra@email.com', '08345678901', 'Jalan Ahmad Yani No.8, Yogyakarta', 'manual', 'proses', 600000, '2026-01-21', 'Custom order'),
+('PES006', 1, 'Linda Wijaya', 'linda@email.com', '08234567890', 'Jalan Gatot Subroto No.12, Semarang', 'tiktok', 'selesai', 450000, '2026-01-16', 'Sudah diterima'),
+('PES007', 1, 'Dwi Prasetyo', 'dwi@email.com', '08123456780', 'Jalan Pemuda No.25, Malang', 'shopee', 'pending', 150000, '2026-01-23', 'Menunggu konfirmasi'),
+('PES008', 1, 'Nadia Kusuma', 'nadia@email.com', '08987654320', 'Jalan Diponegoro No.30, Pontianak', 'manual', 'dikirim', 300000, '2026-01-19', 'Expedisi pilihan');
+
+-- Insert order items
 INSERT INTO order_items (order_id, product_id, jumlah, harga_satuan, subtotal) VALUES
-(1, 1, 3, 35000, 105000),
-(1, 3, 1, 85000, 85000),
-(2, 2, 2, 42000, 84000),
-(2, 4, 1, 28000, 28000);
+-- PES001: 3x Kanaya Blouse Hitam
+(1, 1, 3, 150000, 450000),
+
+-- PES002: 2x Alesya Blouse Denim
+(2, 2, 2, 150000, 300000),
+
+-- PES003: 1x Arini Blouse Burgundy
+(3, 3, 1, 150000, 150000),
+
+-- PES004: 2x Friska Blouse Cream
+(4, 4, 2, 150000, 300000),
+
+-- PES005: 2x Nadlyne Blouse Olive + 2x Safana Blouse Hitam
+(5, 5, 2, 150000, 300000),
+(5, 6, 2, 150000, 300000),
+
+-- PES006: 3x Kanaya Blouse Denim
+(6, 1, 3, 150000, 450000),
+
+-- PES007: 1x Alesya Blouse Mustard
+(7, 2, 1, 150000, 150000),
+
+-- PES008: 2x Arini Blouse Cream
+(8, 3, 2, 150000, 300000);

@@ -12,7 +12,7 @@ require_once '../config/database.php';
 $page_title = "Tambah Pesanan - AD COLLECTION";
 
 // Ambil data produk untuk dropdown
-$products_query = "SELECT id, kode, nama_produk, harga FROM products WHERE stok > 0 ORDER BY nama_produk";
+$products_query = "SELECT id, sku, nama_produk, harga_jual FROM products WHERE stok > 0 ORDER BY nama_produk";
 $products = mysqli_query($conn, $products_query);
 
 include '../includes/header.php';
@@ -22,7 +22,7 @@ include '../includes/header.php';
     <div class="row">
         <?php include '../includes/sidebar.php'; ?>
         
-        <main class="col-md-10 main-content">
+        <main class="col-12 col-md-10 main-content">
             <div class="page-header">
                 <h2><i class="bi bi-plus-circle"></i> Tambah Pesanan Baru</h2>
             </div>
@@ -35,18 +35,18 @@ include '../includes/header.php';
                                 <h5 class="mb-3"><i class="bi bi-person"></i> Data Pembeli</h5>
                                 
                                 <div class="mb-3">
-                                    <label for="nama_customer" class="form-label">Nama Pembeli *</label>
-                                    <input type="text" class="form-control" id="nama_customer" name="nama_customer" required>
+                                    <label for="nama_pembeli" class="form-label">Nama Pembeli *</label>
+                                    <input type="text" class="form-control" id="nama_pembeli" name="nama_pembeli" required>
                                 </div>
                                 
                                 <div class="mb-3">
-                                    <label for="telepon" class="form-label">Nomor Telepon *</label>
-                                    <input type="tel" class="form-control" id="telepon" name="telepon" required>
+                                    <label for="nomor_telepon" class="form-label">Nomor Telepon *</label>
+                                    <input type="tel" class="form-control" id="nomor_telepon" name="nomor_telepon" required>
                                 </div>
                                 
                                 <div class="mb-3">
-                                    <label for="alamat" class="form-label">Alamat Pengiriman *</label>
-                                    <textarea class="form-control" id="alamat" name="alamat" rows="3" required></textarea>
+                                    <label for="alamat_pengiriman" class="form-label">Alamat Pengiriman *</label>
+                                    <textarea class="form-control" id="alamat_pengiriman" name="alamat_pengiriman" rows="3" required></textarea>
                                 </div>
                             </div>
                             
@@ -67,9 +67,10 @@ include '../includes/header.php';
                                     <label for="status" class="form-label">Status Pesanan *</label>
                                     <select class="form-select" id="status" name="status" required>
                                         <option value="pending">Pending</option>
-                                        <option value="diproses">Diproses</option>
+                                        <option value="proses">Proses</option>
                                         <option value="dikirim">Dikirim</option>
                                         <option value="selesai">Selesai</option>
+                                        <option value="batal">Batal</option>
                                     </select>
                                 </div>
                                 

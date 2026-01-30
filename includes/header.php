@@ -44,6 +44,15 @@
             font-family: 'Montserrat', sans-serif;
             background-color: var(--cream);
             color: var(--text-dark);
+            overflow-x: hidden;
+        }
+        
+        .container-fluid {
+            padding: 0;
+        }
+        
+        .row {
+            margin: 0;
         }
         
         h1, h2, h3, h4, h5, h6 {
@@ -57,6 +66,152 @@
             box-shadow: 4px 0 15px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
+        }
+        
+        .sidebar .nav-text {
+            display: inline;
+            margin-left: 10px;
+        }
+        
+        /* Sidebar Toggle Button */
+        .sidebar-toggle {
+            display: none;
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1051;
+            background: var(--primary-brown);
+            color: white;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            pointer-events: auto;
+        }
+        
+        .sidebar-toggle:hover {
+            background: var(--dark-brown);
+        }
+        
+        /* Sidebar Overlay untuk Mobile */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+        
+        /* Responsive Sidebar */
+        @media (max-width: 768px) {
+            .sidebar-toggle {
+                display: block;
+            }
+            
+            .sidebar {
+                min-height: auto;
+                position: fixed;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 250px;
+                z-index: 1000;
+                background: linear-gradient(180deg, #8B7355 0%, #6B5744 100%);
+                transform: translateX(-100%);
+                transition: transform 0.3s ease-in-out;
+                box-shadow: 4px 0 15px rgba(0,0,0,0.2);
+                overflow-y: auto;
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .container-fluid {
+                flex-direction: column !important;
+            }
+            
+            .row {
+                flex-direction: column !important;
+            }
+            
+            .col-md-2.sidebar {
+                width: 100% !important;
+                max-width: 100% !important;
+                margin-bottom: 0;
+                border-radius: 0;
+                position: static;
+                transform: none !important;
+            }
+            
+            .col-md-10.main-content {
+                width: 100% !important;
+                max-width: 100% !important;
+                padding: 60px 15px 15px 15px !important;
+            }
+            
+            .sidebar .brand {
+                padding: 15px;
+            }
+            
+            .sidebar .brand h4 {
+                font-size: 16px;
+            }
+            
+            .sidebar .user-info {
+                padding: 15px;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                flex-direction: row;
+            }
+            
+            .sidebar .user-avatar {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+                margin-bottom: 0;
+                margin-right: 10px;
+            }
+            
+            .sidebar .user-name {
+                font-size: 13px;
+            }
+            
+            .sidebar .nav-link {
+                padding: 12px 15px;
+                margin: 5px 10px;
+                font-size: 14px;
+            }
+            
+            .sidebar .nav-text {
+                margin-left: 10px;
+                display: inline;
+            }
+            
+            .table {
+                font-size: 13px;
+            }
+            
+            .btn, .btn-group {
+                padding: 0.375rem 0.75rem;
+                font-size: 12px;
+            }
         }
         
         .sidebar .brand {
@@ -174,6 +329,84 @@
             border-radius: 15px;
             margin-bottom: 30px;
             box-shadow: 0 4px 15px rgba(139, 115, 85, 0.3);
+        }
+        
+        /* Responsive Main Content */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 15px;
+                min-height: auto;
+            }
+            
+            .page-header {
+                padding: 15px 20px;
+                margin-bottom: 15px;
+                border-radius: 10px;
+            }
+            
+            .page-header h2 {
+                font-size: 20px;
+                margin-bottom: 5px;
+            }
+            
+            .page-header p {
+                font-size: 12px;
+            }
+            
+            .card {
+                border-radius: 10px;
+                margin-bottom: 15px;
+            }
+            
+            .card-header {
+                padding: 15px;
+                border-radius: 10px 10px 0 0 !important;
+            }
+            
+            .card-header h5 {
+                font-size: 16px;
+            }
+            
+            .card-body {
+                padding: 15px;
+            }
+            
+            .table-responsive {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .table {
+                margin-bottom: 0;
+            }
+            
+            .btn {
+                padding: 0.375rem 0.5rem;
+                font-size: 12px;
+            }
+            
+            .btn-lg {
+                padding: 0.375rem 0.75rem;
+                font-size: 13px;
+            }
+            
+            .form-control, .form-select {
+                font-size: 14px;
+                padding: 0.5rem 0.75rem;
+            }
+            
+            .d-flex {
+                flex-wrap: wrap;
+            }
+            
+            .gap-2 {
+                gap: 0.5rem !important;
+            }
+            
+            .btn-group-sm > .btn {
+                padding: 0.25rem 0.4rem;
+                font-size: 11px;
+            }
         }
         
         .page-header h2 {
@@ -304,3 +537,10 @@
     </style>
 </head>
 <body>
+    <!-- Mobile Sidebar Toggle Button -->
+    <button class="sidebar-toggle" id="toggleSidebar" type="button" aria-label="Toggle sidebar">
+        <i class="bi bi-list"></i>
+    </button>
+    
+    <!-- Overlay untuk close sidebar saat klik di mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>

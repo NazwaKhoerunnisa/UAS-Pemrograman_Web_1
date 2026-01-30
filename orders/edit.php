@@ -28,13 +28,13 @@ if (!$order) {
 }
 
 // Ambil items pesanan
-$items_query = "SELECT oi.*, p.kode, p.nama_produk FROM order_items oi 
+$items_query = "SELECT oi.*, p.sku, p.nama_produk FROM order_items oi 
                 JOIN products p ON oi.product_id = p.id 
                 WHERE oi.order_id = $order_id";
 $items = mysqli_query($conn, $items_query);
 
 // Ambil data produk untuk dropdown
-$products_query = "SELECT id, kode, nama_produk, harga FROM products WHERE stok > 0 ORDER BY nama_produk";
+$products_query = "SELECT id, sku, nama_produk, harga_jual FROM products WHERE stok > 0 ORDER BY nama_produk";
 $products = mysqli_query($conn, $products_query);
 
 $page_title = "Edit Pesanan - AD COLLECTION";
@@ -46,9 +46,9 @@ include '../includes/header.php';
     <div class="row">
         <?php include '../includes/sidebar.php'; ?>
         
-        <main class="col-md-10 main-content">
+        <main class="col-12 col-md-10 main-content">
             <div class="page-header">
-                <h2><i class="bi bi-pencil"></i> Edit Pesanan <?= $order['kode_order']; ?></h2>
+                <h2><i class="bi bi-pencil"></i> Edit Pesanan <?= $order['nomor_pesanan']; ?></h2>
             </div>
             
             <div class="card">
