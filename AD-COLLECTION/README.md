@@ -22,9 +22,27 @@ Ringkasan singkat aplikasi AD COLLECTION — aplikasi manajemen produk dan pesan
 
 Semua screenshot yang ada di `assets/img/uploads` ditampilkan di bawah:
 
+### Landing Page
+
+![Landing Page 1](assets/img/uploads/landingpage.jpeg)
+
+![Landing Page 2](assets/img/uploads/landingpage1.JPG)
+
+![Landing Page 3](assets/img/uploads/landingpage2.JPG)
+
+![Landing Page 4](assets/img/uploads/landingpage3.JPG)
+
+### Authentication (Login & Register)
+
 - Login
 
 ![Login](assets/img/uploads/login.JPG)
+
+- Register
+
+![Register](assets/img/uploads/register.jpeg)
+
+### Dashboard & Main Features
 
 - Dashboard
 
@@ -33,10 +51,6 @@ Semua screenshot yang ada di `assets/img/uploads` ditampilkan di bawah:
 - Produk
 
 ![Produk](assets/img/uploads/produk.jpeg)
-
-- Register
-
-![Register](assets/img/uploads/register.jpeg)
 
 - Tambah Produk
 
@@ -49,22 +63,6 @@ Semua screenshot yang ada di `assets/img/uploads` ditampilkan di bawah:
 - Pesanan (detail/edit)
 
 ![Pesanan](assets/img/uploads/pesanan.jpeg)
-
-- Landing Page 1
-
-![Landing 1](assets/img/uploads/landingpage.jpeg)
-
-- Landing Page 2
-
-![Landing 2](assets/img/uploads/landingpage1.JPG)
-
-- Landing Page 3
-
-![Landing 3](assets/img/uploads/landingpage2.JPG)
-
-- Landing Page 4
-
-![Landing 4](assets/img/uploads/landingpage3.JPG)
 
 - Laporan
 
