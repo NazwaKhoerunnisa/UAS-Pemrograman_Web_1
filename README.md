@@ -30,6 +30,33 @@ AD COLLECTION adalah sistem manajemen fashion e-commerce yang complete dengan fi
 
 ---
 
+## 🖼️ Screenshots
+
+Beberapa tampilan aplikasi (file screenshot ada di `AD-COLLECTION/assets/img/uploads/`):
+
+- Dashboard
+
+![Dashboard](AD-COLLECTION/assets/img/uploads/dashboard.jpeg)
+
+- Tambah Pesanan
+
+![Tambah Pesanan](AD-COLLECTION/assets/img/uploads/tambahpesanan.jpeg)
+
+- Edit / Detail Pesanan
+
+![Pesanan](AD-COLLECTION/assets/img/uploads/pesanan.jpeg)
+
+- Produk
+
+![Produk](AD-COLLECTION/assets/img/uploads/produk.jpeg)
+
+- Laporan & Export
+
+![Laporan](AD-COLLECTION/assets/img/uploads/laporan.jpeg)
+![Export PDF](AD-COLLECTION/assets/img/uploads/exportpdf.jpeg)
+![Export Excel](AD-COLLECTION/assets/img/uploads/eksportexcell.JPG)
+
+
 ## ✨ Key Features
 
 - ✅ Dashboard dengan statistik penjualan real-time

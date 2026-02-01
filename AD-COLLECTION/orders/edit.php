@@ -61,18 +61,23 @@ include '../includes/header.php';
                                 <h5 class="mb-3"><i class="bi bi-person"></i> Data Pembeli</h5>
                                 
                                 <div class="mb-3">
-                                    <label for="nama_customer" class="form-label">Nama Pembeli *</label>
-                                    <input type="text" class="form-control" id="nama_customer" name="nama_customer" value="<?= $order['nama_customer']; ?>" required>
+                                    <label for="nama_pembeli" class="form-label">Nama Pembeli *</label>
+                                    <input type="text" class="form-control" id="nama_pembeli" name="nama_pembeli" value="<?= $order['nama_pembeli']; ?>" required>
                                 </div>
                                 
                                 <div class="mb-3">
-                                    <label for="telepon" class="form-label">Nomor Telepon *</label>
-                                    <input type="tel" class="form-control" id="telepon" name="telepon" value="<?= $order['telepon']; ?>" required>
+                                    <label for="nomor_telepon" class="form-label">Nomor Telepon *</label>
+                                    <input type="tel" class="form-control" id="nomor_telepon" name="nomor_telepon" value="<?= $order['nomor_telepon']; ?>" required>
                                 </div>
                                 
                                 <div class="mb-3">
-                                    <label for="alamat" class="form-label">Alamat Pengiriman *</label>
-                                    <textarea class="form-control" id="alamat" name="alamat" rows="3" required><?= $order['alamat']; ?></textarea>
+                                    <label for="alamat_pengiriman" class="form-label">Alamat Pengiriman *</label>
+                                    <textarea class="form-control" id="alamat_pengiriman" name="alamat_pengiriman" rows="3" required><?= $order['alamat_pengiriman']; ?></textarea>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="email_pembeli" class="form-label">Email Pembeli</label>
+                                    <input type="email" class="form-control" id="email_pembeli" name="email_pembeli" value="<?= $order['email_pembeli'] ?? ''; ?>">
                                 </div>
                             </div>
                             
@@ -92,7 +97,7 @@ include '../includes/header.php';
                                     <label for="status" class="form-label">Status Pesanan *</label>
                                     <select class="form-select" id="status" name="status" required>
                                         <option value="pending" <?= $order['status'] == 'pending' ? 'selected' : ''; ?>>Pending</option>
-                                        <option value="diproses" <?= $order['status'] == 'diproses' ? 'selected' : ''; ?>>Diproses</option>
+                                        <option value="proses" <?= $order['status'] == 'proses' ? 'selected' : ''; ?>>Diproses</option>
                                         <option value="dikirim" <?= $order['status'] == 'dikirim' ? 'selected' : ''; ?>>Dikirim</option>
                                         <option value="selesai" <?= $order['status'] == 'selesai' ? 'selected' : ''; ?>>Selesai</option>
                                     </select>
@@ -127,7 +132,7 @@ include '../includes/header.php';
                                 <tbody>
                                     <?php while ($item = mysqli_fetch_assoc($items)): ?>
                                         <tr>
-                                            <td><?= $item['kode']; ?> - <?= $item['nama_produk']; ?></td>
+                                            <td><?= $item['sku']; ?> - <?= $item['nama_produk']; ?></td>
                                             <td><?= rupiah($item['harga_satuan']); ?></td>
                                             <td><?= $item['jumlah']; ?></td>
                                             <td><?= rupiah($item['subtotal']); ?></td>

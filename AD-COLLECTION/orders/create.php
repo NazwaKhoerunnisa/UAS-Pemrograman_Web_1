@@ -108,8 +108,8 @@ include '../includes/header.php';
                                                 <option value="">-- Pilih Produk --</option>
                                                 <?php mysqli_data_seek($products, 0); ?>
                                                 <?php while ($prod = mysqli_fetch_assoc($products)): ?>
-                                                    <option value="<?= $prod['id']; ?>" data-price="<?= $prod['harga']; ?>">
-                                                        <?= $prod['kode']; ?> - <?= $prod['nama_produk']; ?>
+                                                    <option value="<?= $prod['id']; ?>" data-price="<?= $prod['harga_jual']; ?>">
+                                                        <?= $prod['sku']; ?> - <?= $prod['nama_produk']; ?>
                                                     </option>
                                                 <?php endwhile; ?>
                                             </select>
