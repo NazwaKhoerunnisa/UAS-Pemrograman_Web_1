@@ -20,27 +20,67 @@ Ringkasan singkat aplikasi AD COLLECTION — aplikasi manajemen produk dan pesan
 
 ## Screenshots (lokal)
 
-Beberapa tampilan aplikasi yang di-capture dan disimpan di `assets/img/uploads`:
+Semua screenshot yang ada di `assets/img/uploads` ditampilkan di bawah:
+
+- Login
+
+![Login](assets/img/uploads/login.JPG)
 
 - Dashboard
 
 ![Dashboard](assets/img/uploads/dashboard.jpeg)
 
-- Tambah Pesanan
-
-![Tambah Pesanan](assets/img/uploads/tambahpesanan.jpeg)
-
-- Detail / Edit Pesanan
-
-![Pesanan](assets/img/uploads/pesanan.jpeg)
-
 - Produk
 
 ![Produk](assets/img/uploads/produk.jpeg)
 
-- Laporan & Export
+- Register
+
+![Register](assets/img/uploads/register.jpeg)
+
+- Tambah Produk
+
+![Tambah Produk](assets/img/uploads/tambah%20produk.jpeg)
+
+- Tambah Pesanan
+
+![Tambah Pesanan](assets/img/uploads/tambahpesanan.jpeg)
+
+- Pesanan (detail/edit)
+
+![Pesanan](assets/img/uploads/pesanan.jpeg)
+
+- Landing Page 1
+
+![Landing 1](assets/img/uploads/landingpage.jpeg)
+
+- Landing Page 2
+
+![Landing 2](assets/img/uploads/landingpage1.JPG)
+
+- Landing Page 3
+
+![Landing 3](assets/img/uploads/landingpage2.JPG)
+
+- Landing Page 4
+
+![Landing 4](assets/img/uploads/landingpage3.JPG)
+
+- Laporan
 
 ![Laporan](assets/img/uploads/laporan.jpeg)
+
+- Export PDF
+
+![Export PDF](assets/img/uploads/exportpdf.jpeg)
+
+- Export Excel
+
+![Export Excel](assets/img/uploads/eksportexcell.JPG)
+
+- CSV Laporan (file sampel)
+
+`assets/img/uploads/Laporan_Penjualan_2026-02-01.csv`
 
 ## Quick Start (local)
 
