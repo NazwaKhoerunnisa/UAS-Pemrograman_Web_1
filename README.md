@@ -218,31 +218,6 @@ MIT License - For educational purposes
 **University:** Universitas Teknologi Bandung  
 **GitHub:** https://github.com/NazwaKhoerunnisa
 
----
-
-## 🎓 Course Information
-
-**Subject:** Pemrograman Web 1 (3 SKS)  
-**Lecturer:** Nova Agustina, S.T., M.Kom.  
-**Type:** UAS Take Home  
-**University:** Universitas Teknologi Bandung  
-
----
-
-## 📞 Contact
-
-- **GitHub:** https://github.com/NazwaKhoerunnisa
-- **Email:** nazwa@student.utb.ac.id
-
----
-
-## 🌐 Deployment
-
-Project ini siap untuk di-deploy ke:
-- DigitalOcean ($200 free dari GitHub Student Pack)
-- Railway.app (Free tier)
-- Infinity Free Hosting (Forever free)
-- Shared hosting dengan PHP 8.0+ & MySQL
 
 ---
 
@@ -272,9 +247,4 @@ Project ini siap untuk di-deploy ke:
 - Export to Excel (CSV)
 - Only completed orders (status='selesai')
 
----
-
-**Status:** ✅ Complete & Ready for Evaluation  
-**Last Updated:** January 31, 2026  
-**Version:** 1.0 Final Release
 
