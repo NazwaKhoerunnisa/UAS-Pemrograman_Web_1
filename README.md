@@ -32,6 +32,11 @@ AD COLLECTION adalah sistem manajemen fashion e-commerce yang complete dengan fi
 
 ---
 
+##  Demo Aplikasi :
+
+https://youtu.be/G2XK0IAtfBs?si=S7R4-TmbhIjBgXGz
+---
+
 ## 🖼️ Screenshots
 
 ### Landing Page
