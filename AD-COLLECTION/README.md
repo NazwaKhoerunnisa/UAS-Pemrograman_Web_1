@@ -84,6 +84,12 @@ mysql -u root < database_setup.sql
 http://localhost/UAS-Pemrograman_Web_1/AD-COLLECTION/
 ```
 
+## Live Demo
+
+Anda dapat melihat versi ter-deploy dari aplikasi pada tautan berikut:
+
+https://adcollection.infinityfree.me/
+
 ## Catatan Git/GitHub
 
 Pastikan file `assets/img/uploads/*` ikut di-commit agar screenshot muncul di GitHub README. Jika ingin, jalankan perintah berikut dari root repo:
