@@ -16,7 +16,7 @@
 | **Project** | AD COLLECTION |
 | **Student** | Nazwa Khoerunnisa |
 | **NIM** | 23552011093 |
-| **Class** | TIF 23 RP CMS C |
+| **Class** | TIF 23 RP CNS A |
 | **University** | Universitas Teknologi Bandung |
 | **Subject** | Pemrograman Web 1 (3 SKS) |
 | **Lecturer** | Nova Agustina, S.T., M.Kom. |
