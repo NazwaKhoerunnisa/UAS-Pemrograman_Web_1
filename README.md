@@ -24,7 +24,7 @@
 
 ---
 
-**Live Demo:** https://adcollection.infinityfree.me/
+**Link Website:** https://adcollection.infinityfree.me/
 
 ## 🎯 Project Overview
 
